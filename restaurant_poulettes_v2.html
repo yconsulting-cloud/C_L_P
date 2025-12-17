@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chez les Poulettes - Restaurant fait maison à Bayonne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            line-height: 1.6;
+            background: #fefdfb;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 0.95rem;
+            font-family: 'Arial', sans-serif;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e8b4a0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600') center/cover;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            padding: 2rem;
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Arial', sans-serif;
+            font-weight: 300;
+            color: #f0f0f0;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #e8b4a0;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: #d9a290;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: #333;
+        }
+
+        /* Sections communes */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* Présentation */
+        .presentation {
+            background: white;
+        }
+
+        .presentation-content {
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #555;
+        }
+
+        .presentation-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Avis clients */
+        .reviews {
+            background: #f9f7f5;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .review-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #2c3e50;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .rating {
+            color: #e8b4a0;
+            margin-top: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .google-rating {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        .google-rating strong {
+            color: #e8b4a0;
+            font-size: 1.4rem;
+        }
+
+        /* Menu */
+        .menu {
+            background: white;
+        }
+
+        .menu-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .menu-cta {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        /* Infos pratiques */
+        .infos {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .infos h2 {
+            color: white;
+        }
+
+        .infos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .info-block h3 {
+            color: #e8b4a0;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .info-block p {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .info-block a {
+            color: #e8b4a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info-block a:hover {
+            color: #f5c8b8;
+        }
+
+        .map-container {
+            margin-top: 3rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        /* Réseaux sociaux */
+        .social {
+            background: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .social h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: #2c3e50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: #e8b4a0;
+            transform: scale(1.1);
+        }
+
+        /* SVG Icons pour réseaux sociaux */
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* CTA Final */
+        .final-cta {
+            background: #f9f7f5;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #999;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#restaurant">Le restaurant</a></li>
+            <li><a href="#carte">La carte</a></li>
+            <li><a href="#infos">Infos & contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Chez les Poulettes</h1>
+            <p class="subtitle">Cuisine fait maison • Bayonne</p>
+            <p class="tagline">Des produits frais, des plats simples et gourmands, à quelques pas de la cathédrale</p>
+            <div>
+                <a href="tel:+33559257410" class="cta-button">Nous appeler</a>
+                <a href="#infos" class="cta-button cta-secondary">Nous trouver</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Présentation -->
+    <section id="restaurant" class="presentation">
+        <h2>Le restaurant</h2>
+        <div class="presentation-content">
+            <p>
+                Chez les Poulettes, on prépare chaque jour des plats simples et savoureux avec des produits frais. Tartes salées, quiches, salades composées, burrata, œufs mollets... Tout est fait maison, dans une ambiance chaleureuse et décontractée.
+            </p>
+            <p>
+                Notre salle cosy est située en plein cœur de Bayonne, tout près de la cathédrale. On vous accueille dans un lieu convivial où vous pouvez venir en toute simplicité pour un déjeuner ou un goûter.
+            </p>
+        </div>
+    </section>
+
+    <!-- Avis clients -->
+    <section id="avis" class="reviews">
+        <h2>Ce que nos clients en disent</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <p class="review-text">
+                    « Tout était frais et excellent. La serveuse est efficace et sympathique. À quelques pas de la cathédrale, allez-y sans hésiter. »
+                </p>
+                <p class="review-author">— Sandrine L.</p>
+                <div class="rating">★★★★★</div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">
+                    « Accueil chaleureux et convivial. Tout est fait maison et tout est délicieux ! L'œuf mollet avec sa crème de comté est à tomber. Allez-y les yeux fermés. »
+                </p>
+                <p class="review-author">— Laura J.</p>
+                <div class="rating">★★★★★</div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">
+                    « Serveuse aimable, plats simples mais bien réalisés. La burrata à la truffe était très bonne, et la quiche gourmande comme j'aime. Je reviendrai ! »
+                </p>
+                <p class="review-author">— Mathilde B.</p>
+                <div class="rating">★★★★★</div>
+            </div>
+        </div>
+        <div class="google-rating">
+            <p>Note moyenne : <strong>4.5/5</strong> sur Google</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="carte" class="menu">
+        <h2>La carte</h2>
+        <p class="menu-intro">
+            Notre carte change régulièrement selon les saisons et les arrivages. Nous proposons toujours plusieurs formules avec entrées, plats et desserts, tous faits maison avec des produits frais et locaux. Vous y trouverez nos tartes salées, quiches, salades composées et nos desserts gourmands.
+        </p>
+        <div class="menu-cta">
+            <a href="#" class="cta-button">Voir la carte complète</a>
+        </div>
+    </section>
+
+    <!-- Infos pratiques -->
+    <section id="infos" class="infos">
+        <h2>Infos pratiques</h2>
+        <div class="infos-grid">
+            <div class="info-block">
+                <h3>📍 Adresse</h3>
+                <p>
+                    17 Rue d'Espagne<br>
+                    64100 Bayonne<br>
+                    À quelques pas de la cathédrale
+                </p>
+                <p><em>Stationnement : parkings publics à proximité</em></p>
+            </div>
+            <div class="info-block">
+                <h3>🕒 Horaires</h3>
+                <p>
+                    <strong>Du mardi au samedi</strong><br>
+                    9h00 - 18h00
+                </p>
+                <p>
+                    Fermé le dimanche et le lundi
+                </p>
+            </div>
+            <div class="info-block">
+                <h3>📞 Contact</h3>
+                <p>
+                    Téléphone : <a href="tel:+33559257410">05 59 25 74 10</a>
+                </p>
+                <p>
+                    <em>Réservation conseillée le week-end</em>
+                </p>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.9858765344786!2d-1.4783655!3d43.4920782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5141663196b673%3A0x50f23930aa789ca6!2sChez%20les%20Poulettes!5e0!3m2!1sfr!2sfr!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <!-- Réseaux sociaux -->
+    <section class="social">
+        <h2>Suivez-nous</h2>
+        <p>Retrouvez nos plats du jour et notre actualité sur les réseaux sociaux</p>
+        <div class="social-icons">
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="final-cta">
+        <h2>On vous attend !</h2>
+        <p>Envie de passer nous voir ? Appelez-nous ou venez directement au restaurant.</p>
+        <div>
+            <a href="tel:+33559257410" class="cta-button">Nous appeler</a>
+            <a href="https://www.google.com/maps/dir//Chez+les+Poulettes,+17+Rue+d'Espagne,+64100+Bayonne/@43.4920782,-1.4783655,17z" target="_blank" rel="noopener noreferrer" class="cta-button cta-secondary">Itinéraire</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Chez les Poulettes - Tous droits réservés</p>
+        <p>17 Rue d'Espagne, 64100 Bayonne</p>
+    </footer>
+
+</body>
+</html>
